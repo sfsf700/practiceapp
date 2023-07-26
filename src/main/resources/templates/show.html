@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/pstyle.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>タスク詳細</title>
+</head>
+<body>
+
+<div class="flex">
+    <div class="menu-var">
+        <ul class="menu-list">
+            <li class="lists"><a th:href="@{/taskForm}" class="list"><i class="fa-solid fa-pen"></i>新規タスク</a></li>
+            <li class="lists"><a th:href="@{/}" class="list"><i class="fa-regular fa-rectangle-list"></i>タスク一覧</a></li>
+            <li class="lists"><a th:href="@{/managerForm}" class="list"><i class="fa-regular fa-user"></i>メンバー登録</a></li>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="main-head">
+            <table>
+                <tr th:if="${validationError}" th:each="error : ${validationError}">
+                    <td style="color: red; border-bottom: 1px solid;" th:text="${error}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="app-title">
+            <h1 style="font-size: 36px; color: #181854;">タスク詳細</h1>
+        </div>
+        <div class="pd-30 new-task">
+            <form action="#" th:action="@{/tasks/{taskId}/update(taskId=${task.getId()})}" th:method="POST" th:object="${task}">
+                <div class="pd-10">
+                    <label for="title">タイトル</label><br>
+                    <input type="text" th:field="*{title}" id="title" class="input-wrapper-text">
+                </div>
+                <div class="pd-10">
+                    <label for="content">内容</label><br>
+                    <textarea th:field="*{content}" id="content" class="input-wrapper"></textarea>
+                </div>
+                <div class="pd-10">
+                    <label for="period">期日</label><br>
+                    <input type="date" th:field="*{period}" id="period" class="input-wrapper-text">
+                </div>
+                <div class="pd-10">
+                    <label for="importance">優先度</label><br>
+                    <select th:field="*{importance}" id="importance" class="input-wrapper-text">
+                      <option value="高">高</option>
+                      <option value="中">中</option>
+                      <option value="低">低</option>
+                    </select>
+                </div>
+                <div class="pd-10">
+                    <label for="manager">担当者</label><br>
+                    <select th:field="*{manager_id}" id="manager" class="input-wrapper-text">
+                        <option th:each="manager : ${managers}" th:value="${manager.id}" th:text="${manager.first_name + ' ' + manager.last_name}"></option>
+                        <option value="">選択してください</option>
+                    </select>
+                </div>
+
+                <div class="pd-10">
+                    <button type="submit" class="input-wrapper-text submit-btn">更新</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $(document).ready(function() {
+            var currentDate = new Date().toISOString().split("T")[0];
+            $("input[type='date']").attr("min", currentDate);
+        });
+    });
+</script>
+
+</body>
+</html>

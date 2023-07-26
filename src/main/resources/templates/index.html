@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{css/pstyle.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>タスク一覧</title>
+</head>
+<body>
+
+<div class="flex">
+  <div class="menu-var">
+    <ul class="menu-list">
+      <li class="lists"><a th:href="@{/taskForm}" class="list"><i class="fa-solid fa-pen"></i>新規タスク</a></li>
+      <li class="lists"><a th:href="@{/}" class="list"><i class="fa-regular fa-rectangle-list"></i>タスク一覧</a></li>
+      <li class="lists"><a th:href="@{/managerForm}" class="list"><i class="fa-regular fa-user"></i>メンバー登録</a></li>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="main-head">
+      <div th:if="${message}" id="flashMessage" class="flash-message">
+        <p th:text="${message}"></p>
+        <p th:text="${error}"></p>
+      </div>
+    </div>
+    <div class="mama">
+      <div class="d-flex justify-content-sb">
+        <div class="app-title">
+          <h1 style="font-size: 36px; color: #181854;">タスクリスト</h1>
+        </div>
+        <div class="search-box">
+          <form method="GET" th:action="@{/whereTasks}">
+            <select id="importance" name="importance" class="importance-search" >
+              <option value="高">高</option>
+              <option value="中">中</option>
+              <option value="低">低</option>
+            </select>
+            <label for="search-btn"><i class="fa-solid fa-magnifying-glass"></i></label>
+            <button type="submit" class="btn-hidden" id="search-btn"></button>
+          </form>
+        </div>
+      </div>
+      <form method="POST">
+        <table class="task-table">
+          <thead>
+          <tr>
+            <th class="task-th">ID</th>
+            <th class="task-th">タイトル</th>
+            <th class="task-th">内容</th>
+            <th class="task-th">期日</th>
+            <th class="task-th">優先度</th>
+            <th class="task-th">担当者</th>
+            <th>削除</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!-- タスクリストを表示する部分 -->
+          <tr th:each="task: ${taskList}">
+            <td th:text="${task.id}" align="center"></td>
+            <td align="center"><a th:text="${task.title}" th:href="@{/tasks/{id}(id=${task.getId()})}"></a></td>
+            <td th:text="${task.content}"></td>
+            <td th:text="${task.period}" align="center"></td>
+            <td th:text="${task.importance}" align="center"></td>
+            <td th:text="${task.manager_id}" align="center"></td>
+            <td align="center"><button type="submit" th:formaction="@{/tasks/{id}/delete(id=${task.getId()})}" onclick="return confirm('本当に削除してよろしいですか?');">削除</button></td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+
+  </div>
+</div>
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#flashMessage').fadeOut('slow');
+        }, 3000); // メッセージを表示してから3秒後に非表示にする
+    });
+</script>
+</body>
+</html>

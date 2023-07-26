@@ -1,0 +1,175 @@
+/********************************************
+ リセット用
+*********************************************/
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+ul,
+li,
+h1,
+h2,
+p,
+div {
+  margin: 0;
+  padding: 0;
+}
+
+
+li {
+    list-style:none
+}
+/********************************************
+ オリジナル
+*********************************************/
+
+.header{
+    background-color: #181854;
+    color: white;
+}
+
+.pd-10 {
+    padding: 10px;
+}
+
+.flex {
+    display: flex;
+    height: 100%;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-sb {
+    justify-content: space-between;
+}
+
+.menu-var {
+    width: 20%;
+    height: 100vh;
+    background-color: #181854;
+    padding-left: 20px;
+    padding-top: 50px;
+}
+
+.menu-list {
+    color: white;
+}
+
+.lists {
+    font-size: 18px;
+    padding: 6px 0;
+}
+
+i {
+    margin-right: 10px;
+}
+
+.main {
+    width: 80%;
+}
+
+.main-head {
+    height: 70px;
+    justify-content: center;
+    display: flex;
+    margin: 30px;
+}
+
+.mama {
+    width: 80vw;
+    padding: 0 60px
+}
+
+.app-title {
+    justify-content: center;
+    display: flex;
+}
+
+.pd-30 {
+    padding: 30px;
+}
+
+.new-task {
+    justify-content: center;
+    display: flex;
+}
+
+.input-wrapper {
+    width: 330px;
+    height: 60px;
+    font-size: 18px;
+}
+.input-wrapper-text {
+    height: 30px;
+    width: 330px;
+    font-size: 18px;
+}
+
+.submit-btn {
+    background-color: #181854;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+.submit-btn:hover  {
+    opacity: 0.7;
+}
+
+.task-table{
+    width: 100%;
+    border-collapse:  collapse;
+}
+
+.task-table th {
+    background-color: #181854;
+    color: white;
+    padding: 5px 25px;
+}
+
+.task-th {
+    border-right: solid 1px white;
+}
+
+.task-table td {
+    border: solid 1px #181854;
+    padding: 5px 15px;
+}
+
+.list {
+    text-decoration: none;
+    color: white;
+}
+
+table a {
+    text-decoration: none;
+    color: black;
+}
+
+.flash-message {
+    font-size: 20px;
+    margin: auto 0;
+}
+
+.search-box {
+    margin: auto 0;
+}
+
+.importance-search {
+    height: 30px;
+    width: 150px;
+    margin-right: 15px;
+}
+.btn-hidden {
+    display: none;
+}
+
+.input-wrapper-manager {
+    height: 30px;
+    width: 230px;
+    font-size: 18px;
+}

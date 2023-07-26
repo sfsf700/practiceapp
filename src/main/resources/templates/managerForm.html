@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{css/pstyle.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>担当者登録</title>
+    <script>
+        $(document).ready(function() {
+            $("form").submit(function() {
+                var firstName = $("#first_name").val();
+                var lastName = $("#last_name").val();
+                var gender = $("#gender").val();
+
+                if (firstName === "" || lastName === "" || gender === "") {
+                    alert("すべてのフィールドを入力してください。");
+                    return false;
+                }
+
+                return true;
+            });
+        });
+    </script>
+</head>
+<body>
+  <div class="flex">
+      <div class="menu-var">
+          <ul class="menu-list">
+              <li class="lists"><a th:href="@{/taskForm}" class="list"><i class="fa-solid fa-pen"></i>新規タスク</a></li>
+              <li class="lists"><a th:href="@{/}" class="list"><i class="fa-regular fa-rectangle-list"></i>タスク一覧</a></li>
+              <li class="lists"><a th:href="@{#}" class="list"><i class="fa-regular fa-user"></i>メンバー登録</a></li>
+          </ul>
+      </div>
+      <div class="main">
+          <div class="main-head">
+              <table>
+                  <tr th:if="${validationError}" th:each="error : ${validationError}">
+                      <td style="color: red; border-bottom: 1px solid;" th:text="${error}"></td>
+                  </tr>
+              </table>
+          </div>
+          <div class="app-title">
+              <h1 style="font-size: 36px; color: #181854;">メンバー登録</h1>
+          </div>
+          <div class="pd-30 new-task">
+              <form th:action="@{/managers}" th:method="POST" th:object="${managerForm}">
+                  <div class="d-flex">
+                      <div class="pd-10">
+                          <label for="first_name">性</label><br>
+                          <input type="text" th:field="*{first_name}" id="first_name" class="input-wrapper-manager">
+                      </div>
+                      <div class="pd-10">
+                          <label for="last_name">名</label><br>
+                          <input type="text" th:field="*{last_name}" id="last_name" class="input-wrapper-manager">
+                      </div>
+                      <div class="pd-10">
+                          <label for="gender">性別</label><br>
+                          <select th:field="*{gender}" id="gender" class="input-wrapper-manager">
+                              <option value="">選択して下さい</option>
+                              <option value="男性">男性</option>
+                              <option value="女性">女性</option>
+                          </select>
+                          <!--<input type="text" th:field="*{gender}" id="gender" class="input-wrapper-manager">-->
+                      </div>
+                  </div>
+
+                  <div class="pd-10">
+                      <label for="post_code">郵便番号</label><br>
+                      <input type="text" name="zip01" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01');" th:field="*{post_code}" id="post_code" class="input-wrapper-manager">
+                  </div>
+
+                  <div class="d-flex">
+                      <div class="pd-10">
+                          <label for="prefecture">都道府県</label><br>
+                          <input type="text" size="20" th:field="*{prefecture}" id="prefecture" class="input-wrapper-manager" >
+                      </div>
+                      <div class="pd-10">
+                          <label for="city">市区町村</label><br>
+                          <input type="text" size="60" th:field="*{city}" id="city" class="input-wrapper-manager" >
+                      </div>
+                      <div class="pd-10">
+                          <label for="street">番地</label><br>
+                          <input type="text" th:field="*{street}" id="street" class="input-wrapper-manager">
+                      </div>
+                      <div class="pd-10">
+                          <label for="other">建物名(部屋番号)</label><br>
+                          <input type="text" th:field="*{other}" id="other" class="input-wrapper-manager">
+                      </div>
+                  </div>
+
+                  <div class="pd-10">
+                      <label for="phone_number">電話番号</label><br>
+                      <input type="text" th:field="*{phone_number}" id="phone_number" class="input-wrapper-manager">
+                  </div>
+                  <div class="pd-10">
+                      <label for="birth_day">生年月日</label><br>
+                      <input type="date" th:field="*{birth_day}" id="birth_day" class="input-wrapper-manager">
+                  </div>
+                  <div class="pd-10">
+                      <label for="good_language">得意な言語</label><br>
+                      <input type="text" th:field="*{good_language}" id="good_language" class="input-wrapper-manager">
+                  </div>
+                  <div class="pd-10">
+                      <button type="submit" class="input-wrapper-manager submit-btn">登録</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
+</body>
+</html>
